@@ -7,7 +7,7 @@ package bit.houhao.sort;
  */
 public class HeapSort {
     public static void main(String[] args) {
-        int[] nums = {4, 5, 3, 2, 6, 1};
+        int[] nums = {4, 5, 3, 2, 6, 1, 8, 9, 7, 10, 11, 6};
         sort(nums, nums.length);
 
         for (int i = 0 ; i < nums.length - 1; i++) {
@@ -18,7 +18,7 @@ public class HeapSort {
 
     private static void sort(int[] nums, int n) {
         int i;
-        for (i = n / 2; i >= 0; i--) {
+        for (i = n / 2 - 1; i >= 0; i--) {
             generateHeap(nums, i, n);
         }
 
@@ -34,21 +34,21 @@ public class HeapSort {
     }
 
     private static void generateHeap(int[] nums, int i, int n) {
-        int child;
+        int childIndex;
         int tmp;
 
-        for (tmp = nums[i]; getLeftChildIndex(i) < n; i = child) {
-            child = getLeftChildIndex(i);
+        for ( ; getLeftChildIndex(i) < n; i = childIndex) {
+            childIndex = getLeftChildIndex(i);
             //取左右子节点中的较大者
-            if (child != n - 1 && nums[child + 1] > nums[child]) {
-                child++;
+            if (childIndex < n - 1 && nums[childIndex + 1] > nums[childIndex]) {
+                childIndex++;
             }
 
             //更新父节点
-            if (nums[i] < nums[child]) {
+            if (nums[i] < nums[childIndex]) {
                 tmp = nums[i];
-                nums[i] = nums[child];
-                nums[child] = tmp;
+                nums[i] = nums[childIndex];
+                nums[childIndex] = tmp;
             } else {
                 break;
             }
